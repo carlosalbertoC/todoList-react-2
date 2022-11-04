@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { InputForm, Task } from "./Components";
+import { useState } from "react";
 
 function App() {
+
+  const [InputValue, setInputValue] = useState([])
+
+  const paintTask = (value) => {
+    // console.log(paintTask);
+    setInputValue([...InputValue,{
+      value,
+    }])
+    console.log(InputValue);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container p-4">
+      <h2>TODOLIST</h2>
+      <InputForm paintTask={paintTask}/>
+      {InputValue.length>0 && InputValue.map((e,i) => <Task key={i} InputValue={e}/>)}
     </div>
   );
 }
